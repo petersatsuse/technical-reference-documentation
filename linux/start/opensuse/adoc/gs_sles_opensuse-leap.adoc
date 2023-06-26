@@ -1,0 +1,500 @@
+:docinfo:
+include::./common_docinfo_vars.adoc[]
+
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+// General comments
+// Keep in mind that this is a "getting started" guide and the
+//   audience that you are trying to reach.
+// Leverage ASCIIDoc features to make this document readable and usable:
+//   - Text highlights (follow SUSE style guides)
+//   - Admonitions (i.e., NOTE, TIP, IMPORTANT, CAUTION, WARNING)
+//   - Code blocks
+//   - Lists (ordered and unordered, as appropriate)
+//   - Links (to other resources)
+//   - Images
+//     - Place image files under the ./media directory tree
+//       (e.g., ./media/src/svg, ./media/src/png)
+//     - Format preference: svg > png > jpg
+//     - Consolidate images wherever possible
+//       (i.e., don't use two images when one conveys the message)
+//   - Use sections and subsections to organize and group related
+//     steps.
+//
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+// Document attributes and variables
+//
+// NOTES:
+// 1. Update variables below and adjust docbook file accordingly.
+// 2. Comment out any variables/attributes not used.
+// 3. Follow the pattern to include additional variables.
+//
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// organization - do NOT modify
+// -
+:trd: Technical Reference Documentation
+:type: Getting Started
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// document
+// -
+:title: Migrate from openSUSE Leap to SUSE Linux Enterprise Server
+:subtitle: Enable Production Deployments with Enterprise Linux
+
+:product1: SUSE Linux Enterprise Server
+:product1_short: SLES
+:product1_version: 15
+:product1_version_min: 15 SP3
+:product1_url: https://www.suse.com/products/server/
+:product2: openSUSE Leap
+:product2_version: 15
+:product2_version_min: 15.3
+:product2_url: https://www.opensuse.org/#Leap
+
+:usecase: migrate from {product2} to {product1}
+
+:executive_summary: Learn how to easily {usecase} to leverage enterprise support for your production systems.
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// contributor
+// specify information about authors, editors, and others here,
+// then update docinfo file as appropriate
+// -
+:author1_firstname: Peter
+:author1_surname: Schinagl
+:author1_jobtitle: Senior Technical Architect
+:author1_orgname: SUSE
+//:author2_firstname: first (given) name
+//:author2_surname: surname
+//:author2_jobtitle: job title
+//:author2_orgname: organization affiliation
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// miscellaneous
+// define any additional variables here for use within the document
+// -
+:azure_url_product: https://azure.microsoft.com/
+:azure_url_portal: https://portal.azure.com/
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+= {title}: {subtitle}
+
+
+
+== Introduction
+
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+// Provide the motivation and purpose for the document in 2-4 sentences
+// to identify:
+//   - what the document is about
+//   - why it may be of interest to the reader (e.g., a use case)
+//   - what products are being highlighted
+// Include an approved SUSE | Partner logo lock-up if possible
+// Include any additional, relevant details
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+Several years ago, SUSE and the openSUSE community began working to bring the source code streams of {product2_url}[{product2}] and {product1_url}[{product1}] into alignment.
+The goal was bring the user experience and quality of both products to a new level.
+The contribution of {product1} source code promoted {product2} to be a development platform for communities and industry partners alike.
+
+Alignment also opened a path to upgrade from a community Linux to a supported, enterprise Linux for production workloads.
+With the release of {product2} {product2_version_min}, developers and administrators could upgrade to {product1} {product1_version_min}.
+Migration has become even simpler with later releases and is demonstrated in this guide.
+
+Cloud users may be interested in leveraging a pay-as-you-go (PAYG) approach.
+With PAYG, you pay for your usage in the cloud without the upfront cost and sizing complexities of a traditional bring-your-own-subscription (BYOS) model.
+Converting from BYOS to PAYG in Microsoft Azure is also demonstrated in this guide.
+
+
+=== Scope
+
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+// Specify what this guide covers in no more than 2 sentences.
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+Following step-by-step guidance, you migrate from {product2} to {product1}.
+
+Additionally, this guide demonstrates use of Azure Hybrid Benefit to convert a {product1} instance in Microsoft Azure to a pay-as-you-go (PAYG) instance to enable enterprises with cloud cost optimizations.
+
+
+=== Audience
+
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+// Identify for whom this document is intended, perhaps with:
+//   - topics of interests (e.g., machine learning, security, etc.)
+//   - job roles (e.g., developer, administrator, platform architect, etc.)
+//   - required skills
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+Developers and administrators, who may have started with {product2} for development, can use this guide to migrate to a supported, {product1} deployment for production.
+
+
+== Prerequisites
+
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+// Identify minimum requirements (prerequisites) the reader
+// would need in order to follow the steps of this guide.
+// - Link to existing resources whenever possible.
+// - Keep this section brief but elaborate as needed.
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+
+To to perform the {product2} to {product1} migration, you need:
+
+* a system running {product2} {product2_version_min} or later.
+//
++
+This can be bare metal, a virtual machine, or an instance on a cloud platform.
+
+* a {product1} subscription
+//
++
+This is described further in <<Obtain a SLES subscription>
+
+
+To convert {product1} from BYOS to PAYG on Microsoft Azure you need:
+
+* a Microsoft Azure account
+
+* a virtual machine instance in Microsoft Azure, running {product1} with a BYOS subscription
+
+
+
+== Process overview
+
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+// Provide a process overview of the solution.
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+
+The process an options available to you are illustrated and outlined below.
+
+image::sles_opensuse-leap_migration-ways.svg[Overview, scaledwidth="80%", align="center"]
+
+
+In general, to migrate from {product2} to {product1}, you follow these steps:
+
+. obtain a valid {product1} subscription.
+//
++
+This is detailed in the next section.
+
+. install `yast2-registration-sle` in your {product2} system.
+
+. register the system with a valid subscription.
+
+. reboot.
+//
++
+At this point, you have a virtual machine running {product1}.
+
+. optionally, install the Azure Hybrid Benefit extension to switch from BYOS to PAYG.
+
+
+[IMPORTANT]
+====
+Migrating to {product1} from {product2} requires aligned versions.
+For example, you can migrate from {product2} 15.4 to {product1} 15 SP4, from {product2} 15.5 to {product1} 15 SP5, and so on.
+====
+
+
+
+== Obtaining a subscription
+
+A valid {product1} subscription is required for migration.
+This can be a 60-day trial subscription, which is useful for testing and for conversion to PAYG on a cloud platform, or a BYOS subscription, purchased online from SUSE or through your preferred software distributor.
+
+
+=== Get a trial subscription
+
+Get your 60-day trial subcription for {product1} as follows:
+
+. Open your Web browser to http://www.suse.com.
+
+. Select __Free Downloads__.
+
+. Scroll to the __SUSE Linux Enterprise Server__ option.
+
+. Click __Download__.
+
+. Select the required release (such as `15 SP5`) and architecture (for example, `AMD64/Intel 64`).
++
+[IMPORTANT]
+====
+Migration is possible only between aligned versions.
+For example, {product2} 15.5 and {product1} 15 SP5.
+====
+
+. Choose a small image file and click __Download__.
+//
++
+For example, `SLES15-SP4-Minimal-VM.x86_64-kvm-and-xen-GM.qcow2`.
++
+[TIP]
+====
+This image file is not actually needed, as you will perform an online migration.
+====
+
+. Complete the form to create your SUSE account.
++
+[IMPORTANT]
+====
+Be sure to use a valid email address and to check __Don't Forget Your 60-day Trial__.
+====
+
+. Press __Create Account__.
+
+. Follow the instructions presented on the __Success__ page.
+
+. You will receive your subscription key after this.
+// Peter: How is this delivered?
+
+
+=== Buy a subscription
+
+You can purchase a {product1} subscription directly from the https://www.suse.com/shop/[SUSE Shop] as follows:
+
+. Open your Web browser to http://www.suse.com.
+
+. Select __Shop__.
+
+. Scroll to __SUSE Linux Enterprise Server__.
+
+. Click __Start Shopping__.
+
+. Select your configuration.
+//
++
+For this guide, select `1-2 Sockets or 1-2 Virtual Machines` for your environment and `x86-64` for your processor type.
+
+. Click __Buy Now__ for the desired support level (Priority or Standard) and duration (5 years, 3 years, or 1 year).
+
+. Follow the instructions to add your selection to your cart and complete your purchase.
+
+. You will receive your subscription key later.
+// Peter: How is this delivered?
+
+
+== Migrating your system
+
+When you have you valid {product1} subscription, you can perform the migration with the steps below.
+
+
+. Log into your {product2} system at the command line.
+
+. Run all updates and reboot if needed.
++
+[source, console]
+----
+sudo zypper update
+----
+
+. Install the `yast2-migration-sle` package.
++
+[source, console]
+----
+sudo zypper install yast2-migration-sle
+----
+
+. Execute `yast2-migration-sle`.
++
+[source, console]
+----
+sudo yast2 migration-sle
+----
+
+. Enter your email address and subscription key when prompted.
+
+// Peter: Is a reboot required?
+
+. Verify that you now have a {product1} system.
++
+[source, console]
+----
+cat /etc/os-release
+----
+
+[NOTE]
+====
+The {product2} repositories remain attached and are handled as third party repositories.
+====
+
+
+== Convert to PAYG with Azure Hybrid Benefit
+
+
+=== Azure Hybrid Benefit (AHB) for Linux
+
+In Azure, there are two main licensing pricing options: *pay-as-you-go* (PAYG) and *bring-your-own-subscription* (BYOS).
+
+PAYG::
+is a pricing option where you pay Microsoft for the resources you use on a time based usage, e.g. and hourly or monthly.
+You only pay for what you have used.
+It includes the OS and the used infrastructure.
+
+BYOS::
+is the pricing option where you pay Microsoft only for the infrastructure, but not for the OS.
+You need to buy a subscription for the OS from SUSE directly (or its distributors).
+
+Azure Hybrid Benefit (AHB) for Linux lets you switch the software subscription model for your VM nearly on the fly.
+
+AHB works with Virtual Machine Scale Sets, Spot Virtual Machines, and custom images.
+It allows for easy bidirectional conversions between the two buying models without the need to reinstall anything.
+
+The pricing part for the infrastructure does not change.
+
+image::AHB.svg[AzureHybridBenefit, scaledwidth="100%", align="center"]
+
+There are pros and cons to both options.
+
+[cols="5h,~,5h,~"]
+|===
+| | On-Demand / PAYG | | BYOS
+
+|
+|OPEX
+|
+|CAPEX
+
+|+
+|One contact - with the CSP
+|-
+|Two contacts - with CSP and with SUSE
+
+|+
+|Spin up and use
+|+
+|Port your subscriptions to Azure
+
+|+
+|Pay only for the time the instance is running - 1y and 3y reservations are possible
+|-
+|1y or 3y with upfront payment
+
+|+
+|One support contact (L1, L2) by CSP - SUSE and CSP work together in the background
+|+
+|Two support contacts - CSP for cloud service, SUSE for operating system
+
+|+
+|No registration needed - repositories are automatically configured
+|-
+|Manual registration
+
+|+
+|Updates via Azure region local to infrastructure
+|-
+|Updates via SUSE Customer Center over public Internet
+
+|-
+|Cannot purchase SUSE add-ons from CSP
+|+
+|Can purchase SUSE add-ons
+
+|+
+|Operating system is always compliant due to PAYG model
+|-
+|Usage needs to be monitored for compliance
+
+|+
+|In SLES4SAP, Live Patching and SUSE Manager Lifecycle Management are included
+|-
+|Extra subscriptions are needed for Live Patching and SUSE Manager Lifecycle Management
+
+|+
+|MACC eligible
+|-
+|NOT MACC eligible
+
+|===
+
+
+=== Convert to PAYG
+
+Switch to SLES PAYG with the help of Azure Hybrid Benefit (AHB).
+
+. Log out of the instance (if needed).
+
+. From your shell or console, enable AHB for the instance.
++
+[source, console]
+----
+az vm extension set -n AHBForSLES --publisher SUSE.AzureHybridBenefit --vm-name <YOUR_VM_NAME> --resource-group <YOUR_RESOURCE_GROUP>
+----
+
+. Update to PAYG.
++
+[source, console]
+----
+az vm update -g <YOUR_RESOURCE_GROUP> -n <YOUR_VM_NAME> --license-type SLES
+----
++
+[NOTE]
+====
+It could take up to five minutes for the extension to read the license type value and install the repositories.
+
+When complete, your instance is connected to the SUSE public cloud update infrastructure on Azure.
+And the relevant repositories are configured on your instance.
+====
+
+. Log into your instance and verify that the SUSE repositories are configured:
++
+[source, console]
+----
+sudo zypper repos
+----
+
+At this point, you have an Azure {product1} PAYG instance, and you will be billed by Azure for usage.
+
+
+
+
+== Summary
+
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+// Summarize:
+// - Motivation (1 sentence)
+// - What was covered (1-2 sentences)
+// - Next steps (unordered list of 2-4 further learning resources)
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+Many developers begin a project with {product2} but find themselves needing to move into a supported Linux environment for production.
+The steps detailed in this guide enable you quickly and easily migrate your {product2} systems to {product1}.
+
+In addition, systems hosted in Microsoft Azure can be converted from BYOS to PAYG, enabling you to leverage company agreements with Microsoft to optimize your cloud costs.
+
+
+
+
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+// Do not modify below this break.
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+++++
+<?pdfpagebreak?>
+++++
+
+
+:leveloffset: 0
+
+== Legal notice
+include::common_trd_legal_notice.adoc[]
+
+++++
+<?pdfpagebreak?>
+++++
+
+
+:leveloffset: 0
+include::common_gfdl1.2_i.adoc[]
+
+//end

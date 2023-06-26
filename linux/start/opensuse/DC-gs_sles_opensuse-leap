@@ -13,7 +13,7 @@ ROLE="trd"
 ##
 
 # Main Document 
-MAIN="gs_sles_opensuse-leap_azure.adoc"
+MAIN="gs_sles_opensuse-leap.adoc"
 
 # Format Type
 ADOC_TYPE="article"
@@ -43,5 +43,5 @@ ADOC_ATTRIBUTES+=" --attribute BP=1"
 #ADOC_ATTRIBUTES+=" --attribute PSS=1"
 
 # Set document date (yyyy-mm-dd)
-ADOC_ATTRIBUTES+=" --attribute docdate=2023-06-23"
+ADOC_ATTRIBUTES+=" --attribute docdate=2023-06-24"
 

@@ -36,7 +36,6 @@
 <productname>{product1_short}</productname>
 <meta name="platform">{product1}</meta>
 <meta name="platform">{product2}</meta>
-<meta name="platform">{product3}</meta>
 
 
 <!-- author metadata
